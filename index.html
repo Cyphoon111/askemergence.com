@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ask Emergence</title>
-<meta name="description" content="Ask Emergence: two frontier AIs argue your question out, a third audits the answer. Symbiotic AI, Stronger Answers">
+<meta name="description" content="Ask Emergence: one question, two frontier AIs argue it out, a third audits the answer before you see it. Symbiotic AI, Stronger Answers.">
 <link rel="canonical" href="https://askemergence.com/">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -16,65 +16,228 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">
 <style>
-  :root { --ink:#111318; --muted:#5d6675; --line:#e6e8ec; --blue:#1f6fe5; --violet:#8a3ffc; }
+  :root { --ink:#111318; --muted:#5d6675; --line:#e6e8ec; --soft:#f6f7f9; --blue:#1f6fe5; --violet:#8a3ffc; --ok:#1a8f4e; }
   * { box-sizing:border-box; }
-  html, body { margin:0; background:#fff; color:var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
-  main { min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 16px 40px; text-align:center; }
-  .logo { width:min(78vw, 560px); height:auto; display:block; }
-  .lede { max-width:36rem; margin:8px auto 0; font-size:clamp(17px, 2.2vw, 20px); line-height:1.5; color:var(--muted); }
-  .how { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; max-width:52rem; margin:36px auto 0; text-align:left; }
-  .how div { border:1px solid var(--line); border-radius:14px; padding:16px; }
-  .how b { display:block; font-size:15px; margin-bottom:6px; }
-  .how span { font-size:14px; color:var(--muted); line-height:1.45; }
-  .how .n { display:inline-block; width:22px; height:22px; border-radius:11px; color:#fff; font-size:12px; line-height:22px; text-align:center; margin-right:8px; font-weight:700; }
-  .powered { margin:22px auto 0; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; font-size:15px; color:var(--muted); font-weight:600; }
+  html { scroll-behavior:smooth; }
+  html, body { margin:0; background:#fff; color:var(--ink); font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+  /* nav */
+  nav { position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid var(--line); z-index:10; }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:18px; text-decoration:none; }
+  .brand img { width:36px; height:36px; }
+  .links { display:flex; align-items:center; gap:22px; font-size:15px; font-weight:600; }
+  .links a { text-decoration:none; color:var(--muted); }
+  .links a:hover { color:var(--ink); }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:11px 18px; border-radius:999px; font-weight:700; font-size:15px; text-decoration:none; border:1px solid var(--line); color:var(--ink); background:#fff; cursor:pointer; }
+  .btn.primary { background:linear-gradient(135deg, var(--blue), var(--violet)); color:#fff; border-color:transparent; }
+  .btn.primary:hover { filter:brightness(1.05); }
+  .btn.ghost:hover { background:var(--soft); }
+  .btn.block { width:100%; }
+  /* hero */
+  .hero { text-align:center; padding:56px 0 24px; }
+  .hero img.mark { width:min(60vw, 320px); height:auto; }
+  .hero h1 { font-size:clamp(34px, 6vw, 56px); line-height:1.05; margin:18px 0 10px; letter-spacing:-0.5px; }
+  .hero .tag { font-size:clamp(18px, 2.6vw, 24px); font-weight:700; margin:0 0 14px; background:linear-gradient(135deg, var(--blue), var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero .lede { max-width:40rem; margin:0 auto; font-size:clamp(17px, 2.2vw, 20px); line-height:1.55; color:var(--muted); }
+  .cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:26px 0 10px; }
+  .fine { color:var(--muted); font-size:13px; }
+  .powered { margin:18px auto 0; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; font-size:14px; color:var(--muted); font-weight:600; }
   .powered b { color:var(--ink); }
   .patent { display:inline-block; border:1px solid var(--violet); color:var(--violet); border-radius:999px; padding:3px 10px; font-size:11px; font-weight:800; letter-spacing:1.5px; }
-  .pricing { max-width:52rem; margin:40px auto 0; text-align:left; }
-  .pricing h2 { font-size:20px; margin:0 0 4px; text-align:center; }
-  .pricing .sub { text-align:center; color:var(--muted); font-size:14px; margin:0 0 16px; line-height:1.5; }
-  .tiers { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
-  .tier { border:1px solid var(--line); border-radius:14px; padding:16px; }
-  .tier.featured { border-color:var(--violet); }
-  .tier b { display:block; font-size:16px; }
-  .tier .price { font-size:26px; font-weight:800; margin:4px 0; }
-  .tier .price small { font-size:13px; color:var(--muted); font-weight:600; }
-  .tier span { display:block; font-size:14px; color:var(--muted); line-height:1.45; }
-  .tier .runs { color:var(--ink); font-weight:600; }
-  .fine { text-align:center; color:var(--muted); font-size:13px; margin-top:12px; line-height:1.5; }
-  @media (max-width: 720px) { .tiers { grid-template-columns:1fr; } }
-  .cta { margin-top:36px; display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border:1px solid var(--line); border-radius:999px; font-weight:600; font-size:15px; color:var(--ink); }
-  .cta i { width:9px; height:9px; border-radius:50%; background:linear-gradient(135deg, var(--blue), var(--violet)); }
-  footer { margin-top:auto; padding-top:40px; font-size:13px; color:var(--muted); }
-  footer a { color:var(--muted); text-decoration:none; margin:0 8px; }
+  /* sections */
+  section { padding:56px 0; }
+  section.alt { background:var(--soft); }
+  h2 { font-size:clamp(26px, 4vw, 34px); margin:0 0 8px; letter-spacing:-0.3px; text-align:center; }
+  .sub { text-align:center; color:var(--muted); max-width:44rem; margin:0 auto 28px; line-height:1.5; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px; }
+  .card b.t { display:block; font-size:17px; margin-bottom:6px; }
+  .card p { margin:0; color:var(--muted); line-height:1.5; font-size:15px; }
+  .n { display:inline-flex; width:26px; height:26px; border-radius:13px; color:#fff; font-size:13px; align-items:center; justify-content:center; margin-right:8px; font-weight:800; }
+  /* receipt */
+  .receipt { max-width:640px; margin:28px auto 0; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff; }
+  .receipt .head { padding:14px 18px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+  .receipt .head b { font-size:15px; }
+  .receipt .head span { color:var(--muted); font-size:13px; }
+  .receipt ol { list-style:none; margin:0; padding:6px 0; }
+  .receipt li { display:flex; gap:12px; padding:9px 18px; align-items:flex-start; }
+  .receipt li + li { border-top:1px solid var(--soft); }
+  .receipt .i { width:22px; color:var(--muted); font-size:13px; text-align:right; padding-top:2px; }
+  .receipt .l b { display:block; font-size:14px; }
+  .receipt .l span { color:var(--muted); font-size:12.5px; }
+  .receipt .foot { padding:12px 18px; border-top:1px solid var(--line); background:var(--soft); font-size:13.5px; color:var(--ok); font-weight:700; }
+  /* compare */
+  table.cmp { width:100%; border-collapse:collapse; max-width:760px; margin:0 auto; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  table.cmp th, table.cmp td { padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); font-size:15px; }
+  table.cmp th { background:var(--soft); font-size:13px; text-transform:uppercase; letter-spacing:.6px; color:var(--muted); }
+  table.cmp td:first-child { color:var(--muted); }
+  table.cmp .yes { color:var(--ok); font-weight:700; }
+  table.cmp .no { color:#b44; font-weight:700; }
+  /* pricing */
+  .tiers { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .tier { background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px; display:flex; flex-direction:column; gap:8px; position:relative; }
+  .tier.featured { border:2px solid var(--violet); }
+  .tier .badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--violet); color:#fff; font-size:11px; font-weight:800; letter-spacing:1px; padding:4px 10px; border-radius:999px; }
+  .tier .name { font-size:18px; font-weight:800; }
+  .tier .price { font-size:34px; font-weight:800; letter-spacing:-0.5px; }
+  .tier .price small { font-size:14px; color:var(--muted); font-weight:600; }
+  .tier .runs { font-weight:700; }
+  .tier ul { margin:6px 0 10px; padding:0 0 0 18px; color:var(--muted); font-size:14px; line-height:1.6; }
+  .tier .btn { margin-top:auto; }
+  .packs { max-width:820px; margin:28px auto 0; background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px; }
+  .packs h3 { margin:0 0 6px; font-size:19px; }
+  .packs p { margin:0 0 14px; color:var(--muted); font-size:14.5px; }
+  .chips { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .chip { border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .chip b { display:block; font-size:18px; }
+  .chip span { display:block; color:var(--muted); font-size:12.5px; }
+  .chip .save { display:inline-block; margin-top:6px; background:var(--soft); border-radius:999px; padding:2px 8px; font-size:11px; font-weight:800; color:var(--ink); }
+  .enterprise { max-width:820px; margin:16px auto 0; display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; border:1px solid var(--line); border-radius:18px; padding:18px 22px; background:#fff; }
+  .enterprise b { display:block; font-size:16px; }
+  .enterprise span { color:var(--muted); font-size:14px; }
+  /* faq */
+  .faq { max-width:760px; margin:0 auto; }
+  details { border-bottom:1px solid var(--line); padding:14px 0; }
+  summary { cursor:pointer; font-weight:700; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+  summary::after { content:"+"; color:var(--muted); font-weight:400; font-size:20px; }
+  details[open] summary::after { content:"–"; }
+  details p { margin:10px 0 0; color:var(--muted); line-height:1.55; font-size:15px; }
+  /* footer */
+  footer { padding:36px 0; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
+  footer .wrap { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  footer a { color:var(--muted); text-decoration:none; margin-right:14px; }
   footer a:hover { color:var(--ink); }
-  @media (max-width: 720px) { .how { grid-template-columns:1fr; } }
+  @media (max-width: 820px) { .grid3, .tiers { grid-template-columns:1fr; } .chips { grid-template-columns:repeat(2,1fr); } .links .hide { display:none; } }
 </style>
 </head>
 <body>
-<main>
-  <img class="logo" src="/assets/ask-emergence-logo-900.v2.png" alt="Ask Emergence. Symbiotic AI, Stronger Answers" width="900" height="900">
-  <p class="lede">One question. Two frontier AIs form independent positions and argue it out. A third audits the agreement before you ever see the answer.</p>
-  <p class="powered">Powered by: <b>Emergence Engine</b> <span class="patent">PATENT PENDING</span></p>
-  <section class="how" aria-label="How it works">
-    <div><b><span class="n" style="background:var(--blue)">1</span>Position</b><span>Your question goes to the first intelligence, which commits to a plan on its own.</span></div>
-    <div><b><span class="n" style="background:var(--violet)">2</span>Challenge</b><span>A second intelligence reviews it adversarially. Disagreement forces another round.</span></div>
-    <div><b><span class="n" style="background:linear-gradient(135deg,var(--blue),var(--violet))">3</span>Audit</b><span>Agreement is not the end. A final auditor checks for material defects before the answer is released.</span></div>
-  </section>
-  <section class="pricing" aria-label="Pricing">
-    <h2>Plans</h2>
-    <p class="sub">A run is a debate, not a chat message: about five model calls across three frontier models, two arguing and one auditing. Every run's calls, models and cost are shown in its receipt.</p>
-    <div class="tiers">
-      <div class="tier"><b>Starter</b><div class="price">$20<small>/month</small></div><span class="runs">10–14 audited runs</span><span>600 credits a month</span></div>
-      <div class="tier featured"><b>Pro</b><div class="price">$50<small>/month</small></div><span class="runs">29–42 audited runs</span><span>1,750 credits a month</span></div>
-      <div class="tier"><b>Max</b><div class="price">$100<small>/month</small></div><span class="runs">66–97 audited runs</span><span>4,000 credits a month</span></div>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/mark-1024.png" alt=""> Ask Emergence</a>
+    <div class="links">
+      <a class="hide" href="#how">How it works</a>
+      <a class="hide" href="#pricing">Pricing</a>
+      <a class="hide" href="#faq">FAQ</a>
+      <a class="btn ghost" href="https://app.askemergence.com/signin">Sign in</a>
+      <a class="btn primary" href="https://app.askemergence.com/signin">Start free</a>
     </div>
-    <p class="fine">2 free runs to start. Need more? Add credits from $20 with no upper limit; they never expire, and $100+ saves 10%, $250+ 20%, $1,000+ 30%, $10,000+ 35%. Enterprise orders are billed by invoice. Subscription credits reset monthly. Prices in USD; launching with the App Store release.</p>
-  </section>
-  <div class="cta"><i></i>Coming soon to the App Store</div>
-  <footer>
-    <a href="/support.html">Support</a>·<a href="/privacy.html">Privacy</a>·<span style="margin-left:8px">© 2026 Ask Emergence · Emergence Engine, patent pending</span>
-  </footer>
-</main>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <img class="mark" src="/assets/mark-1024.png" alt="Ask Emergence" width="1024" height="1024">
+  <h1>Ask Emergence</h1>
+  <p class="tag">Symbiotic AI, Stronger Answers</p>
+  <p class="lede">One question. Two frontier AIs form independent positions and argue it out. A third audits the agreement before you ever see the answer.</p>
+  <div class="cta">
+    <a class="btn primary" href="https://app.askemergence.com/signin">Start free — 2 runs on us</a>
+    <a class="btn ghost" href="#how">See how a run works</a>
+  </div>
+  <p class="fine">No credit card to start. Works in your browser today; iPhone app coming to the App Store.</p>
+  <p class="powered">Powered by: <b>Emergence Engine</b> <span class="patent">PATENT PENDING</span></p>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <h2>A debate, not a chat message</h2>
+    <p class="sub">A single model answers in one unchecked call. An Ask Emergence run is about five calls across three frontier models, and you see every one of them.</p>
+    <div class="grid3">
+      <div class="card"><b class="t"><span class="n" style="background:var(--blue)">1</span>Position</b><p>Your question goes to the first intelligence, which commits to a complete plan on its own, before anyone else weighs in.</p></div>
+      <div class="card"><b class="t"><span class="n" style="background:var(--violet)">2</span>Challenge</b><p>A second intelligence reviews it adversarially: objections, revisions, a competing plan. Disagreement forces another round.</p></div>
+      <div class="card"><b class="t"><span class="n" style="background:linear-gradient(135deg,var(--blue),var(--violet))">3</span>Audit</b><p>Agreement is not the end. A final auditor checks the agreed plan for material defects. If it finds one, it overrules both and decides.</p></div>
+    </div>
+    <div class="receipt" aria-label="Example receipt">
+      <div class="head"><b>How this answer was made</b><span>5 model calls · 3 models · 41,900 tokens · 41 credits</span></div>
+      <ol>
+        <li><span class="i">1</span><div class="l"><b>Independent position</b><span>GPT-6 Sol · 1,100 tokens</span></div></li>
+        <li><span class="i">2</span><div class="l"><b>Adversarial review, round 1</b><span>Claude Opus 5 · 14,000 tokens</span></div></li>
+        <li><span class="i">3</span><div class="l"><b>Verdict on the review</b><span>GPT-6 Sol · 5,800 tokens</span></div></li>
+        <li><span class="i">4</span><div class="l"><b>Audit of the agreement</b><span>Claude Fable 5.1 · 21,000 tokens</span></div></li>
+      </ol>
+      <div class="foot">Outcome: the reviewed plan passed an independent audit before it was released to you.</div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>What you get that a single model can't give you</h2>
+    <p class="sub">Every answer ships with the evidence of how it was made.</p>
+    <table class="cmp">
+      <tr><th></th><th>Single model chat</th><th>Ask Emergence</th></tr>
+      <tr><td>Model calls per answer</td><td>1</td><td>about 5</td></tr>
+      <tr><td>Independent adversarial review</td><td class="no">No</td><td class="yes">Yes, by a different lab's model</td></tr>
+      <tr><td>Audit before release</td><td class="no">No</td><td class="yes">Yes, every agreement</td></tr>
+      <tr><td>Binding tie-break when models disagree</td><td class="no">No</td><td class="yes">Yes</td></tr>
+      <tr><td>Receipt of every call, model and cost</td><td class="no">No</td><td class="yes">Yes</td></tr>
+      <tr><td>Answers that reads like a decision, not a hedge</td><td>Sometimes</td><td class="yes">By design</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <h2>Plans</h2>
+    <p class="sub">Priced per audited run, not per message. One run costs about what a deep-research task costs elsewhere, and you can see every call it took. Start with 2 free runs.</p>
+    <div class="tiers">
+      <div class="tier"><div class="name">Starter</div><div class="price">$20<small>/month</small></div><div class="runs">10–14 audited runs a month</div>
+        <ul><li>600 credits each month</li><li>Full debate and audit on every run</li><li>Receipts for every answer</li><li>Auto top-up available</li></ul>
+        <a class="btn block ghost" href="https://app.askemergence.com/signin">Start with Starter</a></div>
+      <div class="tier featured"><div class="badge">MOST POPULAR</div><div class="name">Pro</div><div class="price">$50<small>/month</small></div><div class="runs">29–42 audited runs a month</div>
+        <ul><li>1,750 credits each month</li><li>Everything in Starter</li><li>Best value per run for regular use</li><li>Priority support</li></ul>
+        <a class="btn block primary" href="https://app.askemergence.com/signin">Start with Pro</a></div>
+      <div class="tier"><div class="name">Max</div><div class="price">$100<small>/month</small></div><div class="runs">66–97 audited runs a month</div>
+        <ul><li>4,000 credits each month</li><li>Everything in Pro</li><li>For daily, decision-heavy work</li><li>Priority support</li></ul>
+        <a class="btn block ghost" href="https://app.askemergence.com/signin">Start with Max</a></div>
+    </div>
+    <div class="packs">
+      <h3>Need more usage? Add credits any time.</h3>
+      <p>Credits never expire and work on any plan. Bigger amounts earn more credits per dollar. Choose any amount from $20.</p>
+      <div class="chips">
+        <div class="chip"><b>$20</b><span>900 credits · 15–21 runs</span></div>
+        <div class="chip"><b>$100</b><span>5,000 credits · 83–121 runs</span><span class="save">SAVE 10%</span></div>
+        <div class="chip"><b>$250</b><span>14,100 credits · 235–343 runs</span><span class="save">SAVE 20%</span></div>
+        <div class="chip"><b>$1,000</b><span>64,300 credits · 1,071–1,568 runs</span><span class="save">SAVE 30%</span></div>
+      </div>
+    </div>
+    <div class="enterprise">
+      <div><b>Teams and enterprise</b><span>Orders from $10,000 earn 35% more credits, billed by invoice with a purchase order. Shared credit pools for your team.</span></div>
+      <a class="btn ghost" href="mailto:support@askemergence.com?subject=Enterprise%20credits">Talk to us</a>
+    </div>
+    <p class="fine" style="text-align:center;margin-top:14px">Prices in USD. Subscription credits reset monthly; purchased credits never expire. A run uses about 41 credits on average; the range shown assumes 41–60 credits per run.</p>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="wrap faq">
+    <h2>Questions</h2>
+    <details><summary>What exactly is a "run"?</summary><p>One question in, one audited answer out. Inside, a run is about five model calls: an independent position from one frontier model, an adversarial review by a second from a different lab, a verdict, and an audit by a third. If the models disagree twice, the auditor decides. Every call is listed in the answer's receipt.</p></details>
+    <details><summary>Why does it cost more than a chat message?</summary><p>Because it is five of them, across the most capable models available, with one of them acting as a check on the others. A run costs about what a deep-research task costs on other services, and unlike a chat message it comes with a review and an audit you can read.</p></details>
+    <details><summary>Which models are used?</summary><p>Today: GPT-6 Sol from OpenAI as the proposer, Claude Opus 5 as the reviewer, and Claude Fable 5.1 as the auditor and final judge. The mix is chosen from measured results, and we publish which model made each call in every receipt.</p></details>
+    <details><summary>Does this eliminate mistakes?</summary><p>No system can promise that, and we won't. Multiple models can share an error, and every answer says so. What the process does is catch the errors a single model misses: a reviewer from a different lab has to agree, and an auditor has to find no material defect before you see the plan.</p></details>
+    <details><summary>Do credits expire?</summary><p>Monthly subscription credits reset at each renewal. Credits you buy separately never expire and work on any plan.</p></details>
+    <details><summary>What is auto top-up?</summary><p>One switch. When your credits fall below a level you choose, we add the amount you chose so a run is never interrupted. You're billed only when it fires, and you can turn it off any time.</p></details>
+    <details><summary>Can I cancel?</summary><p>Yes, any time, from your account. You keep access until the end of the period you paid for.</p></details>
+    <details><summary>Is there an iPhone app?</summary><p>Yes, and it's coming to the App Store. Until then Ask Emergence works fully in your browser at app.askemergence.com, on desktop and phone.</p></details>
+    <details><summary>What happens to my questions?</summary><p>They are sent to the AI providers to produce your answer and stored with your account so you can revisit past runs. We do not sell your data and do not use your questions to train models. See the <a href="/privacy.html">privacy policy</a>.</p></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="text-align:center">
+    <h2>Ask a question two AIs have to agree on.</h2>
+    <p class="sub">Your first two runs are free. No card required.</p>
+    <a class="btn primary" href="https://app.askemergence.com/signin">Start free</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/support.html">Support</a><a href="https://app.askemergence.com/signin">Sign in</a></div>
+    <div>© 2026 Ask Emergence · Emergence Engine, patent pending</div>
+  </div>
+</footer>
 </body>
 </html>
