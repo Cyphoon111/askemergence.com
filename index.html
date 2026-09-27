@@ -22,6 +22,20 @@
   html, body { margin:0; background:#fff; color:var(--ink); font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
   a { color:inherit; }
   .wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+  /* beta strip */
+  .beta { background:linear-gradient(90deg, var(--blue), var(--violet)); color:#fff; }
+  .beta .wrap { display:flex; align-items:center; justify-content:center; gap:14px; min-height:44px; padding:8px 20px; flex-wrap:wrap; font-size:14px; font-weight:700; }
+  .beta .pill { background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.45); border-radius:999px; padding:3px 10px; font-size:11px; letter-spacing:1.5px; }
+  .beta a { color:#fff; font-weight:800; }
+  /* waitlist */
+  .wl { max-width:560px; margin:0 auto; text-align:center; }
+  .wl form { display:flex; gap:10px; margin-top:16px; }
+  .wl input { flex:1; min-width:0; border:1px solid var(--line); border-radius:999px; padding:12px 16px; font-size:16px; font-family:inherit; }
+  .wl input:focus { outline:2px solid var(--violet); border-color:transparent; }
+  .wl .msg { margin-top:12px; font-size:14px; color:var(--muted); min-height:20px; }
+  .wl .msg.ok { color:var(--ok); font-weight:700; }
+  .wl .msg.err { color:#b44; font-weight:600; }
+  @media (max-width: 520px) { .wl form { flex-direction:column; } }
   /* nav */
   nav { position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid var(--line); z-index:10; }
   nav .wrap { display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
@@ -114,6 +128,7 @@
 </style>
 </head>
 <body>
+<div class="beta"><div class="wrap"><span class="pill">BETA</span><span>Beta access coming soon.</span><a href="#waitlist">Join the waiting list →</a></div></div>
 <nav>
   <div class="wrap">
     <a class="brand" href="/"><img src="/assets/mark-1024.png" alt="Ask Emergence"><span>Ask Emergence</span></a>
@@ -122,7 +137,7 @@
       <a class="hide" href="#pricing">Pricing</a>
       <a class="hide" href="#faq">FAQ</a>
       <a class="btn ghost" href="https://app.askemergence.com/signin">Sign in</a>
-      <a class="btn primary" href="https://app.askemergence.com/signin">Start free</a>
+      <a class="btn primary" href="#waitlist">Join the waiting list</a>
     </div>
   </div>
 </nav>
@@ -133,10 +148,10 @@
   <p class="tag">Symbiotic AI, Stronger Answers</p>
   <p class="lede">One question. Two frontier AIs form independent positions and argue it out. A third audits the agreement before you ever see the answer.</p>
   <div class="cta">
-    <a class="btn primary" href="https://app.askemergence.com/signin">Start free — 2 runs on us</a>
+    <a class="btn primary" href="#waitlist">Join the beta waiting list</a>
     <a class="btn ghost" href="#how">See how a run works</a>
   </div>
-  <p class="fine">No credit card to start. Works in your browser today; iPhone app coming to the App Store.</p>
+  <p class="fine">Beta access opens in waves. Your first two runs are free, no card required. Works in your browser; iPhone app coming to the App Store.</p>
   <p class="powered">Powered by: <b>Emergence Engine</b> <span class="patent">PATENT PENDING</span></p>
 </header>
 
@@ -185,13 +200,13 @@
     <div class="tiers">
       <div class="tier"><div class="name">Starter</div><div class="price">$20<small>/month</small></div><div class="runs">10–14 fully audited runs a month</div>
         <ul><li>600 credits each month</li><li>Full debate and audit on every run</li><li>Receipts for every answer</li><li>Auto top-up available</li></ul>
-        <a class="btn block ghost" href="https://app.askemergence.com/signin">Start with Starter</a></div>
+        <a class="btn block ghost" href="#waitlist">Join the waiting list</a></div>
       <div class="tier featured"><div class="badge">MOST POPULAR</div><div class="name">Pro</div><div class="price">$50<small>/month</small></div><div class="runs">29–42 fully audited runs a month</div>
         <ul><li>1,750 credits each month</li><li>Everything in Starter</li><li>Best value per run for regular use</li><li>Priority support</li></ul>
-        <a class="btn block primary" href="https://app.askemergence.com/signin">Start with Pro</a></div>
+        <a class="btn block primary" href="#waitlist">Join the waiting list</a></div>
       <div class="tier"><div class="name">Max</div><div class="price">$100<small>/month</small></div><div class="runs">66–97 fully audited runs a month</div>
         <ul><li>4,000 credits each month</li><li>Everything in Pro</li><li>For daily, decision-heavy work</li><li>Priority support</li></ul>
-        <a class="btn block ghost" href="https://app.askemergence.com/signin">Start with Max</a></div>
+        <a class="btn block ghost" href="#waitlist">Join the waiting list</a></div>
     </div>
     <div class="packs">
       <h3>Need more usage? Add credits any time.</h3>
@@ -234,13 +249,39 @@
   </div>
 </section>
 
-<section>
-  <div class="wrap" style="text-align:center">
+<section id="waitlist">
+  <div class="wrap wl">
     <h2>Ask a question and let three premiere AIs battle it out!</h2>
-    <p class="sub">Your first two runs are free. No card required.</p>
-    <a class="btn primary" href="https://app.askemergence.com/signin">Start free</a>
+    <p class="sub" style="margin-bottom:0">Beta access is coming soon. Leave your email and we'll invite you in the next wave. Your first two runs are free, no card required.</p>
+    <form id="wl-form" novalidate>
+      <input id="wl-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
+      <button class="btn primary" type="submit" id="wl-btn">Join the waiting list</button>
+    </form>
+    <div class="msg" id="wl-msg" aria-live="polite">We'll only email you about beta access.</div>
   </div>
 </section>
+<script>
+(function () {
+  var API = "https://emergence-api-3mb6jqrbka-uw.a.run.app";
+  var form = document.getElementById("wl-form"), email = document.getElementById("wl-email"), msg = document.getElementById("wl-msg"), btn = document.getElementById("wl-btn");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = (email.value || "").trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { msg.className = "msg err"; msg.textContent = "Please enter a valid email address."; return; }
+    btn.disabled = true; msg.className = "msg"; msg.textContent = "Adding you…";
+    fetch(API + "/waitlist", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: v, source: "site" }) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (!x.ok) throw new Error(x.j && x.j.error || "Something went wrong");
+        msg.className = "msg ok";
+        msg.textContent = x.j.already ? "You're already on the list — #" + x.j.position + ". We'll be in touch." : "You're in! You're #" + x.j.position + " on the list. We'll email you when your wave opens.";
+        email.value = "";
+      })
+      .catch(function (err) { msg.className = "msg err"; msg.textContent = "Couldn't add you right now (" + err.message + "). Please try again in a minute."; })
+      .then(function () { btn.disabled = false; });
+  });
+})();
+</script>
 
 <footer>
   <div class="wrap">
