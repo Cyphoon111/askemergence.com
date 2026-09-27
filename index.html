@@ -30,6 +30,19 @@
   .powered { margin:22px auto 0; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; font-size:15px; color:var(--muted); font-weight:600; }
   .powered b { color:var(--ink); }
   .patent { display:inline-block; border:1px solid var(--violet); color:var(--violet); border-radius:999px; padding:3px 10px; font-size:11px; font-weight:800; letter-spacing:1.5px; }
+  .pricing { max-width:52rem; margin:40px auto 0; text-align:left; }
+  .pricing h2 { font-size:20px; margin:0 0 4px; text-align:center; }
+  .pricing .sub { text-align:center; color:var(--muted); font-size:14px; margin:0 0 16px; line-height:1.5; }
+  .tiers { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
+  .tier { border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .tier.featured { border-color:var(--violet); }
+  .tier b { display:block; font-size:16px; }
+  .tier .price { font-size:26px; font-weight:800; margin:4px 0; }
+  .tier .price small { font-size:13px; color:var(--muted); font-weight:600; }
+  .tier span { display:block; font-size:14px; color:var(--muted); line-height:1.45; }
+  .tier .runs { color:var(--ink); font-weight:600; }
+  .fine { text-align:center; color:var(--muted); font-size:13px; margin-top:12px; line-height:1.5; }
+  @media (max-width: 720px) { .tiers { grid-template-columns:1fr; } }
   .cta { margin-top:36px; display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border:1px solid var(--line); border-radius:999px; font-weight:600; font-size:15px; color:var(--ink); }
   .cta i { width:9px; height:9px; border-radius:50%; background:linear-gradient(135deg, var(--blue), var(--violet)); }
   footer { margin-top:auto; padding-top:40px; font-size:13px; color:var(--muted); }
@@ -47,6 +60,16 @@
     <div><b><span class="n" style="background:var(--blue)">1</span>Position</b><span>Your question goes to the first intelligence, which commits to a plan on its own.</span></div>
     <div><b><span class="n" style="background:var(--violet)">2</span>Challenge</b><span>A second intelligence reviews it adversarially. Disagreement forces another round.</span></div>
     <div><b><span class="n" style="background:linear-gradient(135deg,var(--blue),var(--violet))">3</span>Audit</b><span>Agreement is not the end. A final auditor checks for material defects before the answer is released.</span></div>
+  </section>
+  <section class="pricing" aria-label="Pricing">
+    <h2>Plans</h2>
+    <p class="sub">A run is a debate, not a chat message: about five model calls across three frontier models, two arguing and one auditing. Every run's calls, models and cost are shown in its receipt.</p>
+    <div class="tiers">
+      <div class="tier"><b>Starter</b><div class="price">$20<small>/month</small></div><span class="runs">10–14 audited runs</span><span>600 credits a month</span></div>
+      <div class="tier featured"><b>Pro</b><div class="price">$50<small>/month</small></div><span class="runs">29–42 audited runs</span><span>1,750 credits a month</span></div>
+      <div class="tier"><b>Max</b><div class="price">$100<small>/month</small></div><span class="runs">66–97 audited runs</span><span>4,000 credits a month</span></div>
+    </div>
+    <p class="fine">2 free runs to start. Extra credits: $10 for 500, never expire. Credits reset monthly. Prices in USD; launching with the App Store release.</p>
   </section>
   <div class="cta"><i></i>Coming soon to the App Store</div>
   <footer>
