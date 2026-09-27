@@ -109,13 +109,14 @@
   footer .wrap { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
   footer a { color:var(--muted); text-decoration:none; margin-right:14px; }
   footer a:hover { color:var(--ink); }
-  @media (max-width: 820px) { .grid3, .tiers { grid-template-columns:1fr; } .chips { grid-template-columns:repeat(2,1fr); } .links .hide { display:none; } }
+  @media (max-width: 820px) { .grid3, .tiers { grid-template-columns:1fr; } .chips { grid-template-columns:repeat(2,1fr); } .links .hide { display:none; } .links { gap:10px; } .btn { padding:10px 14px; font-size:14px; white-space:nowrap; } }
+  @media (max-width: 420px) { .brand span { display:none; } }
 </style>
 </head>
 <body>
 <nav>
   <div class="wrap">
-    <a class="brand" href="/"><img src="/assets/mark-1024.png" alt=""> Ask Emergence</a>
+    <a class="brand" href="/"><img src="/assets/mark-1024.png" alt="Ask Emergence"><span>Ask Emergence</span></a>
     <div class="links">
       <a class="hide" href="#how">How it works</a>
       <a class="hide" href="#pricing">Pricing</a>
