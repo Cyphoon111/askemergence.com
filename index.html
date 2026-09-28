@@ -133,6 +133,7 @@
     nav .btn .long { display:none; } nav .btn .short { display:inline; }
     .beta .wrap { font-size:13px; gap:8px; }
   }
+.prose{max-width:820px;margin:0 auto 28px;text-align:left}.prose p{margin:0 0 14px;font-size:17px;line-height:1.6;color:var(--muted,#444)}.prose b{color:var(--text,#111);letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -167,7 +168,11 @@
 <section id="how">
   <div class="wrap">
     <h2>A debate, not a chat message</h2>
-    <p class="sub">A single model answers in one unchecked call. An Ask Emergence run is about five calls across three frontier models, and you see every one of them.</p>
+    <div class="prose">
+      <p><b>PROBLEM:</b> All AI systems can make mistakes and sometimes experience what are commonly called hallucinations—instances in which they report false information or even fabricate facts. When this happens, AI models may present their conclusions with unwarranted confidence and aggressively defend those conclusions.</p>
+      <p><b>SOLUTION:</b> The Emergence Engine deploys several of the world’s most advanced AI models and places them into an adversarial debate loop, where each model automatically and independently investigates the others’ conclusions and attempts to identify and correct their mistakes. This adversarial loop continues until each AI model has exhausted its efforts and can no longer identify any material information, reasoning, or deployment-plan defects that require correction. Once the models converge on agreement, the final answer or deployment plan is presented or executed.</p>
+      <p>In a high-stakes world where there can be no mistakes, the Emergence Engine is built for work that demands exceptional rigor—including business strategy, complex problem-solving, deep research, and application software development.</p>
+    </div>
     <div class="grid3">
       <div class="card"><b class="t"><span class="n" style="background:var(--blue)">1</span>Position</b><p>Your question first goes to a single intelligence, which independently commits to a complete answer or plan before any other model weighs in.</p></div>
       <div class="card"><b class="t"><span class="n" style="background:var(--violet)">2</span>Challenge</b><p>A second intelligence reviews the first model's answer or plan adversarially: objections, revisions, a competing plan. Disagreement forces another round.</p></div>
